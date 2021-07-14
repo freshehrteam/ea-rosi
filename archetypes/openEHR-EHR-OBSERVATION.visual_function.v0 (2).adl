@@ -1,0 +1,158 @@
+archetype (adl_version=1.4; uid=67d438f7-ee44-46d1-a253-9dc4bae158ca)
+	openEHR-EHR-OBSERVATION.visual_function.v0
+
+concept
+	[at0000]
+
+language
+	original_language = <[ISO_639-1::en]>
+
+description
+	original_author = <
+		["date"] = <"2021-03-07">
+		["name"] = <"Ian McNicoll">
+		["organisation"] = <"freshEHR Clinical Informatics Ltd.">
+		["email"] = <"ian@freshehr.com">
+	>
+	lifecycle_state = <"unmanaged">
+	details = <
+		["en"] = <
+			language = <[ISO_639-1::en]>
+		>
+	>
+	other_details = <
+		["licence"] = <"This work is licensed under the Creative Commons Attribution-ShareAlike 4.0 International License. To view a copy of this license, visit http://creativecommons.org/licenses/by-sa/4.0/.">
+		["custodian_organisation"] = <"openEHR Foundation">
+		["original_namespace"] = <"org.openehr">
+		["original_publisher"] = <"openEHR Foundation">
+		["custodian_namespace"] = <"org.openehr">
+		["MD5-CAM-1.0.1"] = <"f1b16d4c44a179eba19596f37eb59226">
+		["build_uid"] = <"f95144d4-57b8-3bea-b1fe-6b3d49ce282e">
+		["ip_acknowledgements"] = <"This artefact includes content from SNOMED Clinical Terms® (SNOMED CT®) which is copyrighted material of the International Health Terminology Standards Development Organisation (IHTSDO). Where an implementation of this artefact makes use of SNOMED CT content, the implementer must have the appropriate SNOMED CT Affiliate license - for more information contact http://www.snomed.org/snomed-ct/get-snomedct or info@snomed.org.">
+	>
+
+definition
+	OBSERVATION[at0000] matches {    -- Visual function
+		data matches {
+			HISTORY[at0001] matches {    -- History
+				events cardinality matches {0..*; unordered} matches {
+					EVENT[at0002] occurrences matches {0..*} matches {    -- Any event
+						data matches {
+							ITEM_TREE[at0003] matches {    -- Tree
+								items cardinality matches {0..*; unordered} matches {
+									ELEMENT[at0004] occurrences matches {0..1} matches {    -- Visual function status
+										value matches {
+											DV_CODED_TEXT matches {
+												defining_code matches {
+													[local::
+													at0005,    -- Vision normal
+													at0006,    -- Vision impaired
+													at0007]    -- Blind or low vision - both eyes
+												}
+											}
+											DV_TEXT matches {*}
+										}
+									}
+									ELEMENT[at0009] occurrences matches {0..*} matches {    -- Visual aids
+										value matches {
+											DV_TEXT matches {*}
+										}
+									}
+									allow_archetype CLUSTER[at0012] occurrences matches {0..*} matches {    -- Visual aid device details
+										include
+											archetype_id/value matches {/.*/}
+									}
+									ELEMENT[at0013] occurrences matches {0..1} matches {    -- Comment
+										value matches {
+											DV_TEXT matches {*}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		protocol matches {
+			ITEM_TREE[at0010] matches {    -- Item tree
+				items cardinality matches {0..*; unordered} matches {
+					allow_archetype CLUSTER[at0011] occurrences matches {0..*} matches {    -- Extension
+						include
+							archetype_id/value matches {/.*/}
+					}
+				}
+			}
+		}
+	}
+
+ontology
+	terminologies_available = <"SNOMED-CT", ...>
+	term_definitions = <
+		["en"] = <
+			items = <
+				["at0000"] = <
+					text = <"Visual function">
+					description = <"Vision">
+				>
+				["at0001"] = <
+					text = <"History">
+					description = <"@ internal @">
+				>
+				["at0002"] = <
+					text = <"Any event">
+					description = <"">
+				>
+				["at0003"] = <
+					text = <"Tree">
+					description = <"@ internal @">
+				>
+				["at0004"] = <
+					text = <"Visual function status">
+					description = <"">
+				>
+				["at0005"] = <
+					text = <"Vision normal">
+					description = <"">
+				>
+				["at0006"] = <
+					text = <"Vision impaired">
+					description = <"">
+				>
+				["at0007"] = <
+					text = <"Blind or low vision - both eyes">
+					description = <"">
+				>
+				["at0009"] = <
+					text = <"Visual aids">
+					description = <"">
+				>
+				["at0010"] = <
+					text = <"Item tree">
+					description = <"@ internal @">
+				>
+				["at0011"] = <
+					text = <"Extension">
+					description = <"">
+				>
+				["at0012"] = <
+					text = <"Visual aid device details">
+					description = <"">
+				>
+				["at0013"] = <
+					text = <"Comment">
+					description = <"">
+				>
+			>
+		>
+	>
+	term_bindings = <
+		["SNOMED-CT"] = <
+			items = <
+				["at0005"] = <[SNOMED-CT::45089002]>
+				["at0006"] = <[SNOMED-CT::397540003]>
+				["at0007"] = <[SNOMED-CT::267727004]>
+				["at0004"] = <[SNOMED-CT::281004000]>
+			>
+		>
+	>

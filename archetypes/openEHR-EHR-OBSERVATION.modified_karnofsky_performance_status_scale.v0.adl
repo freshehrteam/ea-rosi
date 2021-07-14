@@ -1,0 +1,155 @@
+archetype (adl_version=1.4; uid=89ddc4c8-b935-417e-a0e2-3be422d86c67)
+	openEHR-EHR-OBSERVATION.modified_karnofsky_performance_status_scale.v0
+
+concept
+	[at0000]
+
+language
+	original_language = <[ISO_639-1::en]>
+
+description
+	original_author = <
+		["name"] = <"Ian McNicoll">
+		["organisation"] = <"freshEHR Clinical Informatics Ltd.">
+		["email"] = <"ian@freshehr.com">
+		["date"] = <"2021-03-23">
+	>
+	lifecycle_state = <"unmanaged">
+	details = <
+		["en"] = <
+			language = <[ISO_639-1::en]>
+			purpose = <"To record an assessment of patient status using the Modified Karnofsky Performance Status scale.">
+		>
+	>
+	other_details = <
+		["licence"] = <"This work is licensed under the Creative Commons Attribution-ShareAlike 4.0 International License. To view a copy of this license, visit http://creativecommons.org/licenses/by-sa/4.0/.">
+		["custodian_organisation"] = <"openEHR Foundation">
+		["original_namespace"] = <"org.openehr">
+		["original_publisher"] = <"openEHR Foundation">
+		["custodian_namespace"] = <"org.openehr">
+		["MD5-CAM-1.0.1"] = <"c62425a915cf02587304afd78f7745cd">
+		["build_uid"] = <"605167c8-671c-3691-960c-563eff49bb85">
+	>
+
+definition
+	OBSERVATION[at0000] matches {    -- Modified Karnofsky Performance Status Scale
+		data matches {
+			HISTORY[at0001] matches {    -- History
+				events cardinality matches {0..*; unordered} matches {
+					EVENT[at0002] occurrences matches {0..*} matches {    -- Any event
+						data matches {
+							ITEM_TREE[at0003] matches {    -- Tree
+								items cardinality matches {0..*; unordered} matches {
+									ELEMENT[at0004] occurrences matches {0..1} matches {    -- Performance status
+										value matches {
+											100|[local::at0007],
+											90|[local::at0008],
+											80|[local::at0009],
+											70|[local::at0010],
+											60|[local::at0011],
+											50|[local::at0012],
+											40|[local::at0013],
+											30|[local::at0014],
+											20|[local::at0015],
+											10|[local::at0016],
+											0|[local::at0017]
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		protocol matches {
+			ITEM_TREE[at0005] matches {    -- Item tree
+				items cardinality matches {0..*; unordered} matches {
+					allow_archetype CLUSTER[at0006] occurrences matches {0..*} matches {    -- Extension
+						include
+							archetype_id/value matches {/.*/}
+					}
+				}
+			}
+		}
+	}
+
+ontology
+	term_definitions = <
+		["en"] = <
+			items = <
+				["at0000"] = <
+					text = <"Modified Karnofsky Performance Status Scale">
+					description = <"Modified Karnofsky Performance Status Scale">
+				>
+				["at0001"] = <
+					text = <"History">
+					description = <"@ internal @">
+				>
+				["at0002"] = <
+					text = <"Any event">
+					description = <"">
+				>
+				["at0003"] = <
+					text = <"Tree">
+					description = <"@ internal @">
+				>
+				["at0004"] = <
+					text = <"Performance status">
+					description = <"">
+				>
+				["at0005"] = <
+					text = <"Item tree">
+					description = <"@ internal @">
+				>
+				["at0006"] = <
+					text = <"Extension">
+					description = <"">
+				>
+				["at0007"] = <
+					text = <"Normal; no complaints; no evidence of disease">
+					description = <"">
+				>
+				["at0008"] = <
+					text = <"Able to carry on normal activity; minor sign of symptoms of disease">
+					description = <"">
+				>
+				["at0009"] = <
+					text = <"Normal activity with effort; some signs or symptoms of disease">
+					description = <"">
+				>
+				["at0010"] = <
+					text = <"Cares for self; unable to carry on normal activity or to do active work">
+					description = <"">
+				>
+				["at0011"] = <
+					text = <"Able to care for most needs; but requires occasional assistance">
+					description = <"">
+				>
+				["at0012"] = <
+					text = <"Considerable assistance and frequent medical care required">
+					description = <"">
+				>
+				["at0013"] = <
+					text = <"In bed more than 50% of the time">
+					description = <"">
+				>
+				["at0014"] = <
+					text = <"Almost completely bedfast">
+					description = <"">
+				>
+				["at0015"] = <
+					text = <"Totally bedfast and requiring extensive nursing care by professionals and/or family">
+					description = <"">
+				>
+				["at0016"] = <
+					text = <"Comatose or barely rousable">
+					description = <"">
+				>
+				["at0017"] = <
+					text = <"Dead">
+					description = <"">
+				>
+			>
+		>
+	>

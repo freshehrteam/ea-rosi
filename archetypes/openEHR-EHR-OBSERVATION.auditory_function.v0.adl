@@ -1,0 +1,160 @@
+archetype (adl_version=1.4; uid=f9e39cdd-4481-4ca9-ac95-24170cce0185)
+	openEHR-EHR-OBSERVATION.hearing_function.v0
+
+concept
+	[at0000]
+
+language
+	original_language = <[ISO_639-1::en]>
+
+description
+	original_author = <
+		["date"] = <"2021-03-07">
+		["name"] = <"Ian McNicoll">
+		["organisation"] = <"freshEHR Clinical Informatics Ltd.">
+		["email"] = <"ian@freshehr.com">
+	>
+	lifecycle_state = <"unmanaged">
+	details = <
+		["en"] = <
+			language = <[ISO_639-1::en]>
+			purpose = <"To record a high-level overview of person's current hearing function">
+			keywords = <"hearing", ...>
+		>
+	>
+	other_details = <
+		["licence"] = <"This work is licensed under the Creative Commons Attribution-ShareAlike 4.0 International License. To view a copy of this license, visit http://creativecommons.org/licenses/by-sa/4.0/.">
+		["custodian_organisation"] = <"openEHR Foundation">
+		["original_namespace"] = <"org.openehr">
+		["original_publisher"] = <"openEHR Foundation">
+		["custodian_namespace"] = <"org.openehr">
+		["MD5-CAM-1.0.1"] = <"fa27aa20327d58dd64ca437d27370188">
+		["build_uid"] = <"f95144d4-57b8-3bea-b1fe-6b3d49ce282e">
+		["ip_acknowledgements"] = <"This artefact includes content from SNOMED Clinical Terms® (SNOMED CT®) which is copyrighted material of the International Health Terminology Standards Development Organisation (IHTSDO). Where an implementation of this artefact makes use of SNOMED CT content, the implementer must have the appropriate SNOMED CT Affiliate license - for more information contact http://www.snomed.org/snomed-ct/get-snomedct or info@snomed.org.">
+	>
+
+definition
+	OBSERVATION[at0000] matches {    -- Hearing function
+		data matches {
+			HISTORY[at0001] matches {    -- History
+				events cardinality matches {0..*; unordered} matches {
+					EVENT[at0002] occurrences matches {0..*} matches {    -- Any event
+						data matches {
+							ITEM_TREE[at0003] matches {    -- Tree
+								items cardinality matches {0..*; unordered} matches {
+									ELEMENT[at0004] occurrences matches {0..1} matches {    -- Hearing function status
+										value matches {
+											DV_CODED_TEXT matches {
+												defining_code matches {
+													[local::
+													at0005,    -- Hearing normal
+													at0006,    -- Hearing loss
+													at0007]    -- Complete deafness
+												}
+											}
+											DV_TEXT matches {*}
+										}
+									}
+									ELEMENT[at0009] occurrences matches {0..*} matches {    -- Auditory aid
+										value matches {
+											DV_TEXT matches {*}
+										}
+									}
+									allow_archetype CLUSTER[at0012] occurrences matches {0..*} matches {    -- Auditory aid details
+										include
+											archetype_id/value matches {/.*/}
+									}
+									ELEMENT[at0013] occurrences matches {0..1} matches {    -- Comment
+										value matches {
+											DV_TEXT matches {*}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		protocol matches {
+			ITEM_TREE[at0010] matches {    -- Item tree
+				items cardinality matches {0..*; unordered} matches {
+					allow_archetype CLUSTER[at0011] occurrences matches {0..*} matches {    -- Extension
+						include
+							archetype_id/value matches {/.*/}
+					}
+				}
+			}
+		}
+	}
+
+ontology
+	terminologies_available = <"SNOMED-CT", ...>
+	term_definitions = <
+		["en"] = <
+			items = <
+				["at0000"] = <
+					text = <"Hearing function">
+					description = <"A high-level overview of person's current hearing function">
+				>
+				["at0001"] = <
+					text = <"History">
+					description = <"@ internal @">
+				>
+				["at0002"] = <
+					text = <"Any event">
+					description = <"">
+				>
+				["at0003"] = <
+					text = <"Tree">
+					description = <"@ internal @">
+				>
+				["at0004"] = <
+					text = <"Hearing function status">
+					description = <"The current status of the person's hearing function">
+				>
+				["at0005"] = <
+					text = <"Hearing normal">
+					description = <"The person's hearing is normal.">
+				>
+				["at0006"] = <
+					text = <"Hearing loss">
+					description = <"The person has hearing loss.">
+				>
+				["at0007"] = <
+					text = <"Complete deafness">
+					description = <"The person has complete deafness.">
+				>
+				["at0009"] = <
+					text = <"Auditory aid">
+					description = <"">
+				>
+				["at0010"] = <
+					text = <"Item tree">
+					description = <"@ internal @">
+				>
+				["at0011"] = <
+					text = <"Extension">
+					description = <"">
+				>
+				["at0012"] = <
+					text = <"Auditory aid details">
+					description = <"">
+				>
+				["at0013"] = <
+					text = <"Comment">
+					description = <"">
+				>
+			>
+		>
+	>
+	term_bindings = <
+		["SNOMED-CT"] = <
+			items = <
+				["at0004"] = <[SNOMED-CT::47078008]>
+				["at0005"] = <[SNOMED-CT::162339002]>
+				["at0006"] = <[SNOMED-CT::15188001]>
+				["at0007"] = <[SNOMED-CT::8531006]>
+			>
+		>
+	>

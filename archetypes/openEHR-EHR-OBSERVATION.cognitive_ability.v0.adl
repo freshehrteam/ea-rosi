@@ -1,0 +1,167 @@
+archetype (adl_version=1.4; uid=699c5547-6612-4b22-9a9c-21c0ef37bba4)
+	openEHR-EHR-OBSERVATION.cognitive_ability.v0
+
+concept
+	[at0000]
+
+language
+	original_language = <[ISO_639-1::en]>
+
+description
+	original_author = <
+		["date"] = <"2020-02-24">
+		["name"] = <"Heidi Koikkalainen">
+		["organisation"] = <"freshEHR Clinical Informatics Ltd.">
+		["email"] = <"heidi@freshehr.com">
+	>
+	lifecycle_state = <"in_development">
+	details = <
+		["en"] = <
+			language = <[ISO_639-1::en]>
+			purpose = <"To record details about the practical ability of an individual to move freely, such as changing position, walking and moving forward.">
+			keywords = <"moving, walking,climbing, transfer, position", ...>
+			copyright = <"© Apperta Foundation">
+			use = <"Use to record details about the practical ability of an individual to move freely, such as changing position, walking and moving forward.
+
+The following text is copied from the Dutch ZIB model Mobility-v3.2:
+
+Mobility describes the abilities and any limitations in all aspects of mobility, such as changing position, walking and moving forward, in some cases with the help of an aid.
+
+The abilities and any limitations to mobility are documented:
+- to be able to take this into account when in contact with the patient and when providing care to the patient;
+- so as to monitor mobility in the event that mobility limitations are the subject of treatment;
+- to be able to warrant the continuity of care in transfers.
+
+The definitions of the concepts were (partially) taken from the ICF and ICNP definitions.">
+		>
+	>
+	other_details = <
+		["licence"] = <"This work is licensed under the Creative Commons Attribution-ShareAlike 3.0 License. To view a copy of this license, visit http://creativecommons.org/licenses/by-sa/3.0/.">
+		["custodian_organisation"] = <"Apperta UK">
+		["references"] = <"Mobility-v3.2(2019EN) - Zorginformatiebouwstenen [Internet]. Zibs.nl. 2020 [cited 2020 Feb 24]. Available from: https://zibs.nl/wiki/Mobility-v3.2(2019EN)">
+		["current_contact"] = <"Heidi Koikkalainen, heidi@freshehr.com">
+		["original_namespace"] = <"uk.org.clinicalmodels">
+		["original_publisher"] = <"Apperta UK">
+		["custodian_namespace"] = <"uk.org.clinicalmodels">
+		["MD5-CAM-1.0.1"] = <"96edf1b893f05c787b0b1c3b618c4656">
+		["build_uid"] = <"b57ece74-da47-4d09-a64f-2e150ad8f5f8">
+		["ip_acknowledgements"] = <"This artefact includes content from SNOMED Clinical Terms® (SNOMED CT®) which is copyrighted material of the International Health Terminology Standards Development Organisation (IHTSDO). Where an implementation of this artefact makes use of SNOMED CT content, the implementer must have the appropriate SNOMED CT Affiliate license - for more information contact http://www.snomed.org/snomed-ct/get-snomedct or info@snomed.org.">
+		["revision"] = <"0.0.1-alpha">
+	>
+
+definition
+	OBSERVATION[at0000] matches {    -- Cognitive ability
+		data matches {
+			HISTORY[at0001] matches {    -- History
+				events cardinality matches {0..*; unordered} matches {
+					POINT_EVENT[at0002] occurrences matches {0..1} matches {    -- Any event
+						data matches {
+							ITEM_TREE[at0003] matches {    -- Tree
+								items cardinality matches {0..*; unordered} matches {
+									ELEMENT[at0029] occurrences matches {0..1} matches {    -- Overall status
+										value matches {
+											DV_CODED_TEXT matches {
+												defining_code matches {
+													[local::
+													at0030,    -- No cognitive impairment
+													at0031,    -- Cognitive impairment
+													at0032]    -- Severe cognitive impairment
+												}
+											}
+											DV_TEXT matches {*}
+										}
+									}
+									ELEMENT[at0028] occurrences matches {0..1} matches {    -- Description
+										value matches {
+											DV_TEXT matches {*}
+										}
+									}
+									ELEMENT[at0012] occurrences matches {0..1} matches {    -- Comment
+										value matches {
+											DV_TEXT matches {*}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		protocol matches {
+			ITEM_TREE[at0033] matches {    -- Item tree
+				items cardinality matches {0..*; unordered} matches {
+					allow_archetype CLUSTER[at0034] occurrences matches {0..*} matches {    -- Extension
+						include
+							archetype_id/value matches {/.*/}
+					}
+				}
+			}
+		}
+	}
+
+ontology
+	terminologies_available = <"SNOMED-CT", ...>
+	term_definitions = <
+		["en"] = <
+			items = <
+				["at0000"] = <
+					text = <"Cognitive ability">
+					description = <"The ability to move freely, such as changing position, walking and moving forward.">
+				>
+				["at0001"] = <
+					text = <"History">
+					description = <"@ internal @">
+				>
+				["at0002"] = <
+					text = <"Any event">
+					description = <"Any event.">
+				>
+				["at0003"] = <
+					text = <"Tree">
+					description = <"@ internal @">
+				>
+				["at0012"] = <
+					text = <"Comment">
+					description = <"A comment on the individual’s mobility.">
+				>
+				["at0028"] = <
+					text = <"Description">
+					description = <"Narrative description of the individual's overall mobility.">
+				>
+				["at0029"] = <
+					text = <"Overall status">
+					description = <"">
+				>
+				["at0030"] = <
+					text = <"No cognitive impairment">
+					description = <"The individual has no cognitive impairment">
+				>
+				["at0031"] = <
+					text = <"Cognitive impairment">
+					description = <"The individual has mild cognitive impairment.">
+				>
+				["at0032"] = <
+					text = <"Severe cognitive impairment">
+					description = <"The individual has significant cognitive impairment.">
+				>
+				["at0033"] = <
+					text = <"Item tree">
+					description = <"@ internal @">
+				>
+				["at0034"] = <
+					text = <"Extension">
+					description = <"">
+				>
+			>
+		>
+	>
+	term_bindings = <
+		["SNOMED-CT"] = <
+			items = <
+				["at0030"] = <[SNOMED-CT::449888003]>
+				["at0031"] = <[SNOMED-CT::386806002]>
+				["at0032"] = <[SNOMED-CT::702956004]>
+			>
+		>
+	>
